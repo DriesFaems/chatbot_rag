@@ -10,10 +10,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
-# get Groq api key by reading the first line of the text file groq.txt
-
-with open('groq.txt') as file:
-    api_key = str(file.readline())
+# Get Groq API key from user input (password-protected)
+api_key = st.text_input("Enter your Groq API key:", type="password")
+if not api_key:
+    st.warning("Please enter your Groq API key to continue.")
+    st.stop()
 
 os.environ['GROQ_API_KEY'] = api_key
 
